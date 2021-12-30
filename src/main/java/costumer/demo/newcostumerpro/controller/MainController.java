@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.io.IOException;
 import java.util.Optional;
+
 
 @Controller
 public class MainController {
@@ -66,6 +65,7 @@ public class MainController {
             return "categoriesAdd";
         }else
             return "404";
+
     }
 
 
@@ -80,6 +80,7 @@ public class MainController {
     public String productsAdd(Model model){
         model.addAttribute("productDTO", new ProductDTO());
         model.addAttribute("categories", categoryService.getAllCategory());
+
         return "productsAdd";
     }
 
