@@ -20,11 +20,16 @@ public class ProductService {
     public void addProduct(Product product){
         productRepository.save(product);
     }
-    public Optional<Product>getProductById(Long id){
-        return productRepository.findById(id);
-
+    public void removeProductById(long id){
+        productRepository.deleteById(id);
     }
-    public List<Product>deleteProduct(int id){
+    public Optional<Product>getProductById(long id){
+        return productRepository.findById(id);
+    }
+
+    public List<Product> getAllProductByCategoryId(int id){
         return productRepository.findAllByCategory_Id(id);
     }
+
+
 }

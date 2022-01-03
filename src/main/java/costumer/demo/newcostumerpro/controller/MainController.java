@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import java.util.Optional;
 
-
 @Controller
 public class MainController {
 
@@ -96,6 +95,30 @@ public class MainController {
         productService.addProduct(product);
 
         return "redirect:/admin/products";
+    }
+    @GetMapping("admin/product/delete/{id}")
+    public String deleteProduct(@PathVariable long id){
+        productService.removeProductById(id);
+
+        return "redirect:/admin/products";
+    }
+
+
+    @GetMapping("/admin/product/update/{id}")
+    public String updateProductGet(@PathVariable long id, Model model ){
+        Product product = productService.getProductById(id).get();
+        ProductDTO productDTO = new ProductDTO();
+        product.setId(product.getId());
+        product.setDiscount(product.getDiscount());
+        product.setName(product.getName());
+        product.setDiscount(product.getDiscount());
+        product.setPrice(product.getPrice());
+        product.setCategory(product.getCategory());
+
+        model.addAttribute("categories", categoryService.getAllCategory());
+        model.addAttribute("productDTO", productDTO);
+
+        return "productsAdd";
     }
 
 }
